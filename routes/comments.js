@@ -25,6 +25,7 @@ exports.register = function (server, options, next) {
         }
     });
 
+/*
     server.route({
         method: 'GET',
         path: '/comments/{id}',
@@ -32,6 +33,30 @@ exports.register = function (server, options, next) {
 
             db.comments.findOne({
                 _id: request.params.id
+            }, (err, doc) => {
+
+                if (err) {
+                    return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                }
+
+                if (!doc) {
+                    return reply(Boom.notFound());
+                }
+
+                reply(doc);
+            });
+
+        }
+    });
+*/
+
+    server.route({
+        method: 'GET',
+        path: '/comments/{url}',
+        handler: function (request, reply) {
+
+            db.comments.find({
+                url: request.params.url
             }, (err, doc) => {
 
                 if (err) {
@@ -70,8 +95,8 @@ exports.register = function (server, options, next) {
         config: {
             validate: {
                 payload: {
-                    url: Joi.string().min(10).max(2000).required(),
-                    comment: Joi.string().min(30).max(10000).required()
+                    url: Joi.string().min(3).max(2000).required(),
+                    comment: Joi.string().min(20).max(10000).required()
                 }
             }
         }
