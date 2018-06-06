@@ -1,2 +1,2 @@
-"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "d:\test\mongo db data"
+"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "C:\Users\AKhamidullin\mongodata"
 
