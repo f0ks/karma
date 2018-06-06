@@ -1,5 +1,7 @@
+'use strict';
+
 const searchUrl = {
-    controller: function (ApiService, $templateCache) {
+    controller: function (ApiService) {
         const $ctrl = this;
 
         Object.assign($ctrl, {
@@ -8,14 +10,17 @@ const searchUrl = {
 
 
                   ApiService.getAll()
-                    .then(
-                      function (data) {
+                    .then((data) => {
                           console.log(data)
-                      },
-                      function (errResponse) {
-                          console.error('Error while fetching contacts');
+                      }
+                      ,
+                      (err) => {
+                          console.log(err)
                       }
                     );
+              },
+              onChange(value) {
+                  console.log(value);
               }
 
           }

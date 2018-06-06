@@ -1,1 +1,4 @@
-<input ng-model="$ctrl.search" type="text" />
+<input
+  ng-model="$ctrl.search"
+  ng-change="$ctrl.onChange($ctrl.search)"
+       type="text" />

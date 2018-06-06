@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http, $q) {
 
     let REST_SERVICE_URI = 'http://localhost:3000/comments';
