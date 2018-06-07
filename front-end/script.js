@@ -1,12 +1,14 @@
 'use strict';
 
 const searchUrl = {
-    controller: function (ApiService) {
+    controller: function (ApiService, $location) {
         const $ctrl = this;
 
         Object.assign($ctrl, {
 
               $onInit() {
+                  const url = $location.url().substring(1);
+                  $ctrl.onChange(url);
 
                   // ApiService.getAll()
                   //   .then((data) => {
@@ -19,8 +21,7 @@ const searchUrl = {
                   //   );
               },
               onChange(value) {
-                  //console.log(value);
-
+                  $location.path('/' + value);
                   ApiService.getOne(value)
                     .then((data) => {
                           $ctrl.results = data;
