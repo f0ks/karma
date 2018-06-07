@@ -30,7 +30,7 @@ angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http
 
     function getOne(url) {
         let deferred = $q.defer();
-        $http.get(REST_SERVICE_URI + `/${url}`)
+        if (url) $http.get(REST_SERVICE_URI + `/${url}`)
           .then(
             function (response) {
                 deferred.resolve(response.data);

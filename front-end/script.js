@@ -1,7 +1,7 @@
 'use strict';
 
 const searchUrl = {
-    controller: function (ApiService, $location) {
+    controller: function (ApiService, $location, $rootScope) {
         const $ctrl = this;
 
         Object.assign($ctrl, {
@@ -10,15 +10,10 @@ const searchUrl = {
                   const url = $location.url().substring(1);
                   $ctrl.onChange(url);
 
-                  // ApiService.getAll()
-                  //   .then((data) => {
-                  //         console.log(data)
-                  //     }
-                  //     ,
-                  //     (err) => {
-                  //         console.log(err)
-                  //     }
-                  //   );
+                  $rootScope.$on("$locationChangeStart", function($event, next, current) {
+                      let url = next.split("/").pop();
+                      $ctrl.onChange(url);
+                  });
               },
               onChange(value) {
                   $location.path('/' + value);
