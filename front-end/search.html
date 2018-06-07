@@ -2,3 +2,12 @@
   ng-model="$ctrl.search"
   ng-change="$ctrl.onChange($ctrl.search)"
        type="text" />
+
+
+<div>
+
+    <ul>
+        <li ng-repeat="item in $ctrl.results">{{item.comment}}</li>
+    </ul>
+
+</div>

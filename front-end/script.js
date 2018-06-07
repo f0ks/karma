@@ -8,9 +8,22 @@ const searchUrl = {
 
               $onInit() {
 
+                  // ApiService.getAll()
+                  //   .then((data) => {
+                  //         console.log(data)
+                  //     }
+                  //     ,
+                  //     (err) => {
+                  //         console.log(err)
+                  //     }
+                  //   );
+              },
+              onChange(value) {
+                  console.log(value);
 
-                  ApiService.getAll()
+                  ApiService.getOne(value)
                     .then((data) => {
+                          $ctrl.results = data;
                           console.log(data)
                       }
                       ,
@@ -18,9 +31,6 @@ const searchUrl = {
                           console.log(err)
                       }
                     );
-              },
-              onChange(value) {
-                  console.log(value);
               }
 
           }
@@ -30,32 +40,20 @@ const searchUrl = {
     templateUrl: 'search.html'
 };
 
+/*
 const searchResults = {
     bindings: {
-        api: '<',
-        onUpdate: '&'
+        data: '='
     },
     templateUrl: 'search-result.html',
     controller: function () {
 
-        const $ctrl = this;
-        $ctrl.$onChanges = function (changes) {
-            if (changes.api) {
-                $ctrl.api = angular.copy($ctrl.api);
-            }
-        };
-        $ctrl.doSomething = function () {
-            $ctrl.onUpdate({
-                $event: {
-                    message: $ctrl.api
-                }
-            });
-        };
 
     }
 };
+*/
 
 angular.module('karmaApp', [])
   .component('searchUrl', searchUrl)
-  .component('searchResults', searchResults);
+  //.component('searchResults', searchResults);
 
