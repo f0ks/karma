@@ -19,12 +19,23 @@ const searchUrl = {
                   //   );
               },
               onChange(value) {
-                  console.log(value);
+                  //console.log(value);
 
                   ApiService.getOne(value)
                     .then((data) => {
                           $ctrl.results = data;
                           console.log(data)
+                      }
+                      ,
+                      (err) => {
+                          console.log(err)
+                      }
+                    );
+              },
+              create(name, comment) {
+                  ApiService.create({"url": name, "comment": comment})
+                    .then((data) => {
+                        $ctrl.onChange($ctrl.search);
                       }
                       ,
                       (err) => {
@@ -55,5 +66,5 @@ const searchResults = {
 
 angular.module('karmaApp', [])
   .component('searchUrl', searchUrl)
-  //.component('searchResults', searchResults);
+//.component('searchResults', searchResults);
 

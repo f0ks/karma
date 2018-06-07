@@ -1,7 +1,20 @@
 <input
   ng-model="$ctrl.search"
   ng-change="$ctrl.onChange($ctrl.search)"
-       type="text" />
+  type="text"/>
+
+
+<div ng-if="$ctrl.search">
+
+    <textarea ng-model="$ctrl.comment"></textarea>
+
+    <button
+
+      ng-click="$ctrl.create($ctrl.search, $ctrl.comment)"
+    >create
+    </button>
+</div>
+
 
 
 <div>

@@ -7,7 +7,7 @@ angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http
     let factory = {
         getAll: getAll,
         getOne: getOne,
-        updateDepartment: updateDepartment,
+        create: create,
         deleteDepartment: deleteDepartment
     };
 
@@ -31,6 +31,21 @@ angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http
     function getOne(url) {
         let deferred = $q.defer();
         $http.get(REST_SERVICE_URI + `/${url}`)
+          .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (errResponse) {
+                console.error('Error while creating department');
+                deferred.reject(errResponse);
+            }
+          );
+        return deferred.promise;
+    }
+
+    function create(data) {
+        let deferred = $q.defer();
+        $http.post(REST_SERVICE_URI, data)
           .then(
             function (response) {
                 deferred.resolve(response.data);
