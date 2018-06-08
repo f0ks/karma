@@ -55,6 +55,8 @@ exports.register = function (server, options, next) {
         path: '/comments/{url}',
         handler: function (request, reply) {
 
+            console.log('___params', request.query); // ?skip=20
+
             db.comments.find({
                 url: request.params.url
             }, (err, doc) => {
