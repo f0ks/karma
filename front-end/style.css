@@ -1,0 +1,20 @@
+.karma-container {
+    width: 80%;
+    margin: 0 auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.karma-input {
+    border: 1px solid #666;
+}
+
+.karma-input._search {
+    width: 100%;
+    font-size: 16px;
+}
+
+.karma-input._comment {
+    width: 100%;
+    font-size: 16px;
+
+}

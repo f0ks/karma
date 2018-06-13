@@ -1,4 +1,5 @@
 <input
+  class="karma-input _search"
   ng-model="$ctrl.search"
   ng-change="$ctrl.onChange($ctrl.search)"
   type="text"/>
@@ -6,7 +7,9 @@
 
 <div ng-if="$ctrl.search">
 
-    <textarea ng-model="$ctrl.comment"></textarea>
+    <textarea
+      class="karma-input _comment"
+      ng-model="$ctrl.comment"></textarea>
 
     <button
       ng-if="$ctrl.comment"
