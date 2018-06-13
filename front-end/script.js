@@ -9,9 +9,11 @@ const searchUrl = {
               $onInit() {
                   const url = $location.url().substring(1);
                   $ctrl.onChange(url);
+                  $ctrl.search = url;
 
                   $rootScope.$on("$locationChangeStart", function($event, next, current) {
                       let url = next.split("/").pop();
+                      $ctrl.search = url;
                       $ctrl.onChange(url);
                   });
               },
