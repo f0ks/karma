@@ -2,6 +2,7 @@
     width: 80%;
     margin: 0 auto;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: none; /* noscript */
 }
 
 .karma-input {
@@ -17,4 +18,10 @@
     width: 100%;
     font-size: 16px;
 
+}
+
+.karma-error {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
 }

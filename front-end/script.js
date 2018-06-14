@@ -7,6 +7,8 @@ const searchUrl = {
         Object.assign($ctrl, {
 
               $onInit() {
+                  document.querySelectorAll('.karma-container')[0].style.display = 'block';
+
                   const url = $location.url().substring(1);
                   $ctrl.onChange(url);
                   $ctrl.search = url;
