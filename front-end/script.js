@@ -9,15 +9,18 @@ const searchUrl = {
               $onInit() {
                   document.querySelectorAll('.karma-container')[0].style.display = 'block';
 
-                  const url = $location.url().substring(1);
+                  const url = $ctrl.cleanUrl($location.url().substring(1));
                   $ctrl.onChange(url);
                   $ctrl.search = url;
 
-                  $rootScope.$on("$locationChangeStart", function($event, next, current) {
-                      let url = next.split("/").pop();
+                  $rootScope.$on("$locationChangeStart", function ($event, next, current) {
+                      const url = $ctrl.cleanUrl(next.split("/").pop());
                       $ctrl.search = url;
                       $ctrl.onChange(url);
                   });
+              },
+              cleanUrl(url) {
+                  return url.split('?')[0]; // cut ?skip=*
               },
               onChange(value) {
                   $location.path('/' + value);
@@ -35,7 +38,7 @@ const searchUrl = {
               create(name, comment) {
                   ApiService.create({"url": name, "comment": comment})
                     .then((data) => {
-                        $ctrl.onChange($ctrl.search);
+                          $ctrl.onChange($ctrl.search);
                       }
                       ,
                       (err) => {
