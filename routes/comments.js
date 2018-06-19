@@ -66,7 +66,8 @@ exports.register = function (server, options, next) {
 
             db.comments.find({
                 url: request.params.url
-            },).limit(request.query.length ? parseInt(request.query) : 10).skip(request.query.length ? parseInt(request.query) : 0,
+            },).limit(request.query.length ? parseInt(request.query) : 10)
+              .skip(request.query.length ? parseInt(request.query) : 0).sort({_id: -1}, // new posts first
               (err, doc) => {
 
                   if (err) {
