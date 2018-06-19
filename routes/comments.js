@@ -56,10 +56,14 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             console.log('___params', request.query); // ?skip=20
+            db.comments.count({url: request.params.url}, (err, doc) => {
+                console.log('count', doc)
+            });
 
             db.comments.find({
                 url: request.params.url
-            },).limit(request.query.length ? parseInt(request.query) : 10).skip(request.query.length ? parseInt(request.query) : 0, (err, doc) => {
+            },).limit(request.query.length ? parseInt(request.query) : 10).skip(request.query.length ? parseInt(request.query) : 0,
+              (err, doc) => {
 
                 if (err) {
                     return reply(Boom.wrap(err, 'Internal MongoDB error'));
