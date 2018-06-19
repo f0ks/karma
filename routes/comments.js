@@ -55,9 +55,13 @@ exports.register = function (server, options, next) {
         path: '/comments/{url}',
         handler: function (request, reply) {
 
-            console.log('___params', request.query); // ?skip=20
-            db.comments.count({url: request.params.url}, (err, doc) => {
-                console.log('count', doc)
+            //console.log('___params', request.query); // ?skip=20
+
+            let total;
+
+            db.comments.count({url: request.params.url}, (err, res) => {
+                total = res;
+                //console.log('count', doc)
             });
 
             db.comments.find({
@@ -65,16 +69,21 @@ exports.register = function (server, options, next) {
             },).limit(request.query.length ? parseInt(request.query) : 10).skip(request.query.length ? parseInt(request.query) : 0,
               (err, doc) => {
 
-                if (err) {
-                    return reply(Boom.wrap(err, 'Internal MongoDB error'));
-                }
+                  if (err) {
+                      return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                  }
 
-                if (!doc) {
-                    return reply(Boom.notFound());
-                }
+                  if (!doc) {
+                      return reply(Boom.notFound());
+                  }
 
-                reply(doc);
-            });
+                  reply(
+                    {
+                        data: doc,
+                        total: total
+                    }
+                  );
+              });
 
         }
     });

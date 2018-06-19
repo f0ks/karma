@@ -22,7 +22,9 @@
 <div>
 
     <ul>
-        <li ng-repeat="item in $ctrl.results">{{item.comment}}</li>
+        <li ng-repeat="item in $ctrl.results.data">{{item.comment}}</li>
     </ul>
+
+    <p ng-if="$ctrl.results.total">total: {{$ctrl.results.total}}</p>
 
 </div>
