@@ -14,7 +14,7 @@
       placeholder="Write your post here"
     ></textarea>
 
-    <button
+    <button class="karma-input"
       ng-disabled="!(($ctrl.comment.length > 10) && ($ctrl.comment.length < 10000))"
       ng-click="$ctrl.create($ctrl.search, $ctrl.comment)"
     >Post
@@ -24,14 +24,13 @@
 
 <div>
 
-    <ul>
-        <li ng-repeat="item in $ctrl.results.data">{{item.comment}}</li>
-    </ul>
 
-    <p ng-if="$ctrl.results.total">total: {{$ctrl.results.total}}</p>
+    <div class="karma-comment" ng-repeat="item in $ctrl.results.data">{{item.comment}}</div>
 
-    pagi {{$ctrl.pagesCount}}
-    <ul class="pagination">
+
+    <!--<p ng-if="$ctrl.results.total">total: {{$ctrl.results.total}}</p>-->
+
+    <ul class="karma-pagination">
         <li ng-repeat="i in $ctrl.getNumber($ctrl.pagesCount) track by $index"
             ng-class="{'current': $index == $ctrl.currentPage-1}"
             ng-click="$ctrl.goToPage($index)"
