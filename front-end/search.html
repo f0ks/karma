@@ -30,4 +30,14 @@
 
     <p ng-if="$ctrl.results.total">total: {{$ctrl.results.total}}</p>
 
+    pagi {{$ctrl.pagesCount}}
+    <ul class="pagination">
+        <li ng-repeat="i in $ctrl.getNumber($ctrl.pagesCount) track by $index"
+            ng-class="{'current': $index == $ctrl.currentPage-1}"
+            ng-click="$ctrl.goToPage($index)"
+        >
+            <span>{{$index+1}}</span>
+        </li>
+    </ul>
+
 </div>

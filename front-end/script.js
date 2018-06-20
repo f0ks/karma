@@ -6,8 +6,12 @@ const searchUrl = {
 
         Object.assign($ctrl, {
 
+              pageSize: 10,
+              currentPage: 1,
+              currentUrl: null,
+
               $onInit() {
-                  document.querySelectorAll('.karma-container')[0].style.display = 'block';
+                  document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
 
                   const url = $ctrl.cleanUrl($location.url().substring(1));
                   $ctrl.onChange(url);
@@ -19,14 +23,26 @@ const searchUrl = {
                       $ctrl.onChange(url);
                   });
               },
+
               cleanUrl(url) {
                   return url.split('?')[0]; // cut ?skip=*
               },
+              getNumber(num) {
+                  return new Array(num);
+              },
+              goToPage(num) {
+                  $ctrl.currentPage = num + 1;
+                  $ctrl.onChange($ctrl.currentUrl);
+              },
               onChange(value) {
+                  $ctrl.currentUrl = value;
                   $location.path('/' + value);
-                  ApiService.getOne(value)
+                  const skip = $ctrl.pageSize * ($ctrl.currentPage - 1);
+                  ApiService.getOne(value, skip)
                     .then((data) => {
                           $ctrl.results = data;
+
+                          $ctrl.pagesCount = Math.ceil($ctrl.results.total / $ctrl.pageSize);
                           console.log(data)
                       }
                       ,

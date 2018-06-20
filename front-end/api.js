@@ -28,9 +28,9 @@ angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http
         return deferred.promise;
     }
 
-    function getOne(url) {
+    function getOne(url, skip) {
         let deferred = $q.defer();
-        if (url) $http.get(REST_SERVICE_URI + `/${url}`)
+        if (url) $http.get((REST_SERVICE_URI + `/${url}`) + (skip ? `?skip=${skip}` : ``))
           .then(
             function (response) {
                 deferred.resolve(response.data);

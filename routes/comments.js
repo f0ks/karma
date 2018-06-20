@@ -67,7 +67,7 @@ exports.register = function (server, options, next) {
             db.comments.find({
                 url: request.params.url
             },).limit(request.query.length ? parseInt(request.query) : 10)
-              .skip(request.query.length ? parseInt(request.query) : 0).sort({date: -1}, // new posts first
+              .skip(request.query.length ? parseInt(request.query.substr(6)) : 0).sort({date: -1}, // new posts first
               (err, doc) => {
 
                   if (err) {

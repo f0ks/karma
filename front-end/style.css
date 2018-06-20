@@ -25,3 +25,14 @@
     font-weight: bold;
     font-size: 18px;
 }
+
+.pagination li {
+    list-style-type: none;
+    float: left;
+    margin: 0 10px;
+    border: 1px solid #666;
+    padding: 2px 6px;
+}
+.pagination .current {
+    background: #666;
+}
