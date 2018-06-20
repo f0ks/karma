@@ -30,7 +30,7 @@
 
     <!--<p ng-if="$ctrl.results.total">total: {{$ctrl.results.total}}</p>-->
 
-    <ul class="karma-pagination">
+    <ul ng-if="$ctrl.pagesCount > 1" class="karma-pagination">
         <li ng-repeat="i in $ctrl.getNumber($ctrl.pagesCount) track by $index"
             ng-class="{'current': $index == $ctrl.currentPage-1}"
             ng-click="$ctrl.goToPage($index)"

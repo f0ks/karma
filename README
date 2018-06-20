@@ -2,11 +2,8 @@
 
 
 TODO:
--styles
 -rate limit: use nginx + ui message
--pagination
 -reply comment
+-encodeURIComponent or something for any string in input
 
 
-backend:
--sort by date works wrong (new added to the middle)
