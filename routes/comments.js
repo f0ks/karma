@@ -66,8 +66,8 @@ exports.register = function (server, options, next) {
 
             db.comments.find({
                 url: request.params.url
-            },).limit(request.query.length ? parseInt(request.query) : 100)
-              .skip(request.query.length ? parseInt(request.query) : 0).sort({_id: -1}, // new posts first
+            },).limit(request.query.length ? parseInt(request.query) : 10)
+              .skip(request.query.length ? parseInt(request.query) : 0).sort({date: -1}, // new posts first
               (err, doc) => {
 
                   if (err) {
@@ -94,18 +94,19 @@ exports.register = function (server, options, next) {
         path: '/comments',
         handler: function (request, reply) {
 
-            const book = request.payload;
+            const record = request.payload;
 
             //Create an id
-            book._id = uuid.v1();
+            record._id = uuid.v1();
+            record.date = new Date().getTime();
 
-            db.comments.save(book, (err, result) => {
+            db.comments.save(record, (err, result) => {
 
                 if (err) {
                     return reply(Boom.wrap(err, 'Internal MongoDB error'));
                 }
 
-                reply(book);
+                reply(record);
             });
         },
         config: {
