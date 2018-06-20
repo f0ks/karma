@@ -2,6 +2,7 @@
   class="karma-input _search"
   ng-model="$ctrl.search"
   ng-change="$ctrl.onChange($ctrl.search)"
+  placeholder="Search"
   type="text"/>
 
 
@@ -9,12 +10,14 @@
 
     <textarea
       class="karma-input _comment"
-      ng-model="$ctrl.comment"></textarea>
+      ng-model="$ctrl.comment"
+      placeholder="Write your post here"
+    ></textarea>
 
     <button
-      ng-if="$ctrl.comment"
+      ng-disabled="!(($ctrl.comment.length > 10) && ($ctrl.comment.length < 10000))"
       ng-click="$ctrl.create($ctrl.search, $ctrl.comment)"
-    >create
+    >Post
     </button>
 </div>
 

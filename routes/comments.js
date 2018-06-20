@@ -66,7 +66,7 @@ exports.register = function (server, options, next) {
 
             db.comments.find({
                 url: request.params.url
-            },).limit(request.query.length ? parseInt(request.query) : 10)
+            },).limit(request.query.length ? parseInt(request.query) : 100)
               .skip(request.query.length ? parseInt(request.query) : 0).sort({_id: -1}, // new posts first
               (err, doc) => {
 
@@ -112,7 +112,7 @@ exports.register = function (server, options, next) {
             validate: {
                 payload: {
                     url: Joi.string().min(3).max(2000).required(),
-                    comment: Joi.string().min(20).max(10000).required()
+                    comment: Joi.string().min(10).max(10000).required()
                 }
             }
         }
