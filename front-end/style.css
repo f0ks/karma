@@ -14,28 +14,33 @@
 }
 
 .karma-input {
-    border: 1px solid #666;
+    border: 2px solid #ccc;
     color: #666;
     padding: 4px;
     border-radius: 2px;
     margin-bottom: 10px;
 }
 
-.karma-input:disabled {
-    color: #aaa
+.karma-input._post {
+    cursor: pointer;
 }
 
+.karma-input:disabled {
+    color: #aaa;
+    cursor: default;
+}
 
 .karma-input._search {
     width: 100%;
     font-size: 18px;
     color: green;
+    margin-top: 20px;
 }
 
 .karma-input._comment {
     width: 100%;
     font-size: 16px;
-
+    resize: none;
 }
 
 .karma-error {
@@ -54,6 +59,7 @@
     cursor: pointer;
 
 }
+
 .karma-pagination .current {
     background: #ccc;
     cursor: default;

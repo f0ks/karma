@@ -13,14 +13,16 @@ const searchUrl = {
               $onInit() {
                   document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
 
-                  const url = $ctrl.cleanUrl($location.url().substring(1));
+                  const url = $ctrl.cleanUrl(decodeURIComponent($location.url()).substring(1));
                   $ctrl.onChange(url);
                   $ctrl.search = url;
 
                   $rootScope.$on("$locationChangeStart", function ($event, next, current) {
                       const url = $ctrl.cleanUrl(next.split("/").pop());
-                      $ctrl.search = url;
-                      $ctrl.onChange(url);
+                      //$ctrl.search = decodeURIComponent(url);
+                      $ctrl.search = decodeURIComponent(decodeURIComponent(url))
+                      //$ctrl.search = url;
+                      $ctrl.onChange(url, true);
                   });
               },
 
@@ -34,8 +36,13 @@ const searchUrl = {
                   $ctrl.currentPage = num + 1;
                   $ctrl.onChange($ctrl.currentUrl);
               },
-              onChange(value) {
+              onChange(value, isEncoded) {
                   $ctrl.currentUrl = value;
+                  if (isEncoded) {
+                      value = decodeURIComponent(value);
+                  } else {
+                      value = encodeURIComponent(value);
+                  }
                   $location.path('/' + value);
                   const skip = $ctrl.pageSize * ($ctrl.currentPage - 1);
                   ApiService.getOne(value, skip)
