@@ -2,9 +2,6 @@
 
 
 TODO:
--rate limit: use nginx + ui message
 -reply comment
--encodeURIComponent or something for any string in input
--error messages
 
 

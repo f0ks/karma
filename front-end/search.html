@@ -21,14 +21,9 @@
     </button>
 </div>
 
-
 <div>
 
-
-    <div class="karma-comment" ng-repeat="item in $ctrl.results.data">{{item.comment}}</div>
-
-
-    <!--<p ng-if="$ctrl.results.total">total: {{$ctrl.results.total}}</p>-->
+    <div class="karma-comment" ng-repeat="item in $ctrl.results.data" ng-bind-html="item.comment | linky"></div>
 
     <ul ng-if="$ctrl.pagesCount > 1" class="karma-pagination">
         <li ng-repeat="i in $ctrl.getNumber($ctrl.pagesCount) track by $index"
