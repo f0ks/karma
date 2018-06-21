@@ -9,12 +9,13 @@ const searchUrl = {
               pageSize: 10,
               currentPage: 1,
               currentUrl: null,
+              init: false,
 
               $onInit() {
                   document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
 
                   const url = $ctrl.cleanUrl($location.url().substring(1));
-                  $ctrl.onChange(atob(url));
+                  //$ctrl.onChange(atob(url));
                   $ctrl.search = url;
 
                   $rootScope.$on("$locationChangeStart", function ($event, next, current) {
@@ -23,7 +24,11 @@ const searchUrl = {
 
                       $ctrl.search = url;
                       //$ctrl.search = url;
-                      $ctrl.onChange(url);
+                      if (!$ctrl.init) { // if page just loaded, then load from url
+                          $ctrl.onChange(url);
+                          $ctrl.init = true;
+                      }
+
                   });
               },
 
