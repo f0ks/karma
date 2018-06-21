@@ -65,6 +65,7 @@ const searchUrl = {
                   ApiService.create({"url": btoa(name), "comment": comment})
                     .then((data) => {
                           $ctrl.onChange($ctrl.search);
+                          $ctrl.comment = '';
                       }
                       ,
                       (err) => {
