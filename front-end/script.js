@@ -18,9 +18,11 @@ const searchUrl = {
                   $ctrl.search = url;
 
                   $rootScope.$on("$locationChangeStart", function ($event, next, current) {
+                      if (next.substring(next.indexOf("#!/") + 3).indexOf('/') > -1) return; // don't process unencoded urls
+
                       const url = $ctrl.cleanUrl(next.split("/").pop());
                       //$ctrl.search = decodeURIComponent(url);
-                      $ctrl.search = decodeURIComponent(decodeURIComponent(url))
+                      $ctrl.search = decodeURIComponent(url);
                       //$ctrl.search = url;
                       $ctrl.onChange(url, true);
                   });
@@ -38,8 +40,18 @@ const searchUrl = {
               },
               onChange(value, isEncoded) {
                   $ctrl.currentUrl = value;
+                  if ($ctrl.search) {
+                      $ctrl.search = $ctrl.search.replace('http://', "");
+                      value = value.replace('http://', "");
+                      $ctrl.search = $ctrl.search.replace('https://', "");
+                      value = value.replace('https://', "");
+                      $ctrl.search = $ctrl.search.replace(/[|&;:$@"<>()+,]/g, "");
+                      value = value.replace(/[|&;:$@"<>()+,]/g, "");
+                  }
+
+
                   if (isEncoded) {
-                      value = decodeURIComponent(value);
+                      //value = decodeURIComponent(value);
                   } else {
                       value = encodeURIComponent(value);
                   }
