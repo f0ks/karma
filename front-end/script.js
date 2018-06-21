@@ -13,18 +13,17 @@ const searchUrl = {
               $onInit() {
                   document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
 
-                  const url = $ctrl.cleanUrl(decodeURIComponent($location.url()).substring(1));
-                  $ctrl.onChange(url);
+                  const url = $ctrl.cleanUrl($location.url().substring(1));
+                  $ctrl.onChange(atob(url));
                   $ctrl.search = url;
 
                   $rootScope.$on("$locationChangeStart", function ($event, next, current) {
-                      if (next.substring(next.indexOf("#!/") + 3).indexOf('/') > -1) return; // don't process unencoded urls
 
-                      const url = $ctrl.cleanUrl(next.split("/").pop());
-                      //$ctrl.search = decodeURIComponent(url);
-                      $ctrl.search = decodeURIComponent(url);
+                      const url = $ctrl.cleanUrl(atob(next.split("/").pop()));
+
+                      $ctrl.search = url;
                       //$ctrl.search = url;
-                      $ctrl.onChange(url, true);
+                      $ctrl.onChange(url);
                   });
               },
 
@@ -38,26 +37,12 @@ const searchUrl = {
                   $ctrl.currentPage = num + 1;
                   $ctrl.onChange($ctrl.currentUrl);
               },
-              onChange(value, isEncoded) {
+              onChange(value) {
                   $ctrl.currentUrl = value;
-                  if ($ctrl.search) {
-                      $ctrl.search = $ctrl.search.replace('http://', "");
-                      value = value.replace('http://', "");
-                      $ctrl.search = $ctrl.search.replace('https://', "");
-                      value = value.replace('https://', "");
-                      $ctrl.search = $ctrl.search.replace(/[|&;:$@"<>()+,]/g, "");
-                      value = value.replace(/[|&;:$@"<>()+,]/g, "");
-                  }
 
-
-                  if (isEncoded) {
-                      //value = decodeURIComponent(value);
-                  } else {
-                      value = encodeURIComponent(value);
-                  }
-                  $location.path('/' + value);
+                  $location.path('/' + btoa(value));
                   const skip = $ctrl.pageSize * ($ctrl.currentPage - 1);
-                  ApiService.getOne(value, skip)
+                  ApiService.getOne(btoa(value), skip)
                     .then((data) => {
                           $ctrl.results = data;
 
@@ -71,7 +56,7 @@ const searchUrl = {
                     );
               },
               create(name, comment) {
-                  ApiService.create({"url": name, "comment": comment})
+                  ApiService.create({"url": btoa(name), "comment": comment})
                     .then((data) => {
                           $ctrl.onChange($ctrl.search);
                       }
