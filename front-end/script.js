@@ -51,7 +51,8 @@ const searchUrl = {
                       }
                       ,
                       (err) => {
-                          console.log(err)
+                          console.log(err);
+                          alert('error');
                       }
                     );
               },
@@ -62,7 +63,8 @@ const searchUrl = {
                       }
                       ,
                       (err) => {
-                          console.log(err)
+                          console.log(err);
+                          alert('error');
                       }
                     );
               }
