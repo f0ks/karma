@@ -18,6 +18,8 @@ const searchUrl = {
                     //$ctrl.onChange(atob(url));
                     $ctrl.search = url;
 
+                    document.getElementById('search').focus();
+
                     $rootScope.$on("$locationChangeStart", function ($event, next, current) {
 
                         const url = $ctrl.cleanUrl(atob(next.split("/").pop()));
