@@ -33,7 +33,22 @@ const searchUrl = {
                         }
 
                     });
+
+                    // get last posts
+                    ApiService.getAll()
+                      .then((data) => {
+                            $ctrl.lastPosts = data;
+                        }
+                        ,
+                        (err) => {
+                            console.log(err);
+                            alert('error');
+                        }
+                      );
                 },
+
+                getLocation: () => $location.path(),
+                getLink: (url) => btoa(url),
 
                 cleanUrl(url) {
                     return url.split('?')[0]; // cut ?skip=*

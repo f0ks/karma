@@ -7,6 +7,15 @@
   type="text"/>
 
 
+<div ng-if="$ctrl.getLocation() === '/'" class="karma-last">
+    <h4>Last ones</h4>
+    <ul>
+        <li ng-repeat="post in $ctrl.lastPosts"><a href="/#!/{{$ctrl.getLink(post.url)}}">{{post.comment }}</a></li>
+    </ul>
+
+
+</div>
+
 <div ng-if="$ctrl.search">
 
     <textarea
