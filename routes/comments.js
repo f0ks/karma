@@ -13,7 +13,7 @@ exports.register = function (server, options, next) {
         path: '/comments',
         handler: function (request, reply) {
 
-            db.comments.find({}).limit(10, (err, docs) => {
+            db.comments.find({}).limit(10).sort({date: -1}, (err, docs) => {
 
                 if (err) {
                     return reply(Boom.wrap(err, 'Internal MongoDB error'));
