@@ -23,6 +23,7 @@ const searchUrl = {
                     $rootScope.$on("$locationChangeStart", function ($event, next, current) {
 
                         const url = $ctrl.cleanUrl(atob(next.split("/").pop()));
+                        document.title = url + ' (makarma)';
 
                         $ctrl.search = url;
                         //$ctrl.search = url;
