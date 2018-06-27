@@ -25,7 +25,7 @@
     ></textarea>
 
     <button class="karma-input _post"
-      ng-disabled="!(($ctrl.comment.length > 10) && ($ctrl.comment.length < 10000))"
+      ng-disabled="!(($ctrl.comment.length > 1) && ($ctrl.comment.length < 10000))"
       ng-click="$ctrl.create($ctrl.search, $ctrl.comment)"
     >Post
     </button>
