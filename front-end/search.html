@@ -1,6 +1,5 @@
 <div class="karma-search-container">
 
-
     <input
       class="karma-input _search"
       ng-model="$ctrl.search"
@@ -10,15 +9,10 @@
       type="text"/>
 
     <div class="karma-logo">
-        <a href="/">M</a>
+        <a href="javascript:void(0)" ng-click="$ctrl.goToMain()">M</a>
     </div>
 
-
-
-
 </div>
-
-
 
 
 <div ng-if="$ctrl.getLocation() === '/'" class="karma-last">

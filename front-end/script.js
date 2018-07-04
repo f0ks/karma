@@ -70,6 +70,11 @@ const searchUrl = {
                   $ctrl.currentPage = num + 1;
                   $ctrl.onChange($ctrl.currentUrl);
               },
+
+              goToMain() {
+                  $location.path('/');
+              },
+
               onChange(value) {
                   $ctrl.currentUrl = value;
 

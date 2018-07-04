@@ -49,8 +49,8 @@
 }
 
 .karma-input._search {
-    width: 100%;
-    margin-left: 45px;
+    width: calc(100% - 40px);
+    margin-left: 40px;
     font-size: 18px;
     color: green;
     margin-top: 20px;
