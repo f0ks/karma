@@ -13,6 +13,24 @@
     color: #444;
 }
 
+.karma-search-container .karma-logo {
+    width: 60px;
+}
+
+.karma-logo {
+    margin-top: -52px;
+}
+
+.karma-logo a {
+    text-decoration: none;
+    color: #222;
+    font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+    font-size: 34px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+}
+
 .karma-input {
     border: 2px solid #ccc;
     color: #666;
@@ -32,6 +50,7 @@
 
 .karma-input._search {
     width: 100%;
+    margin-left: 45px;
     font-size: 18px;
     color: green;
     margin-top: 20px;
@@ -51,6 +70,7 @@
 
 .karma-pagination {
     margin-bottom: 24px;
+    overflow: hidden;
 }
 
 .karma-pagination li {

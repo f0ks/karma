@@ -1,14 +1,28 @@
-<input
-  class="karma-input _search"
-  ng-model="$ctrl.search"
-  ng-change="$ctrl.onChange($ctrl.search)"
-  placeholder="Search"
-  id="search"
-  type="text"/>
+<div class="karma-search-container">
+
+
+    <input
+      class="karma-input _search"
+      ng-model="$ctrl.search"
+      ng-change="$ctrl.onChange($ctrl.search)"
+      placeholder="Search"
+      id="search"
+      type="text"/>
+
+    <div class="karma-logo">
+        <a href="/">M</a>
+    </div>
+
+
+
+
+</div>
+
+
 
 
 <div ng-if="$ctrl.getLocation() === '/'" class="karma-last">
-    <h4>Last ones</h4>
+    <h3>Last ones</h3>
     <ul>
         <li ng-repeat="post in $ctrl.lastPosts">
             <a ng-click="$ctrl.link=true" href="/#!/{{$ctrl.getLink(post.url)}}">{{post.comment }}</a>
@@ -33,10 +47,9 @@
     </button>
 </div>
 
-<div>
+<div ng-if="$ctrl.results.data">
 
     <div class="karma-comment"
-         ng-if="$ctrl.results.data"
          ng-repeat="item in $ctrl.results.data" ng-bind-html="item.comment | linky">
     </div>
 

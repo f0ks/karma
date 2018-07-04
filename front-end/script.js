@@ -38,6 +38,8 @@ const searchUrl = {
                       // clean comments for main page
                       if (url === '') {
                           $ctrl.results.data = null;
+                          $ctrl.pagesCount = null;
+                          $ctrl.currentPage = 1;
                       }
 
                   });
