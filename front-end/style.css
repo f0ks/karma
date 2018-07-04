@@ -49,6 +49,10 @@
     font-size: 18px;
 }
 
+.karma-pagination {
+    margin-bottom: 24px;
+}
+
 .karma-pagination li {
     list-style-type: none;
     float: left;

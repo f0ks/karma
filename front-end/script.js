@@ -14,9 +14,7 @@ const searchUrl = {
               $onInit() {
                   document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
 
-                  const url = $ctrl.cleanUrl($location.url().substring(1));
-                  //$ctrl.onChange(atob(url));
-                  $ctrl.search = url;
+                  $ctrl.search = $ctrl.cleanUrl($location.url().substring(1));
 
                   document.getElementById('search').focus();
 
@@ -30,15 +28,16 @@ const searchUrl = {
                       if ($ctrl.link) {
                           $ctrl.onChange(atob(url));
                           $ctrl.link = false;
-
-
                       }
 
-
-                      //$ctrl.search = url;
                       if (!$ctrl.init) { // if page just loaded, then load from url
                           $ctrl.onChange(url);
                           $ctrl.init = true;
+                      }
+
+                      // clean comments for main page
+                      if (url === '') {
+                          $ctrl.results.data = null;
                       }
 
                   });
@@ -109,22 +108,7 @@ const searchUrl = {
     templateUrl: 'search.html'
 };
 
-/*
-const searchResults = {
-    bindings: {
-        data: '='
-    },
-    templateUrl: 'search-result.html',
-    controller: function () {
-
-
-    }
-};
-*/
-
 angular.module('karmaApp', ['ngSanitize'])
   .component('searchUrl', searchUrl);
 
-
-//.component('searchResults', searchResults);
 
