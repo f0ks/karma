@@ -25,38 +25,11 @@ exports.register = function (server, options, next) {
         }
     });
 
-    /*
-        server.route({
-            method: 'GET',
-            path: '/comments/{id}',
-            handler: function (request, reply) {
-
-                db.comments.findOne({
-                    _id: request.params.id
-                }, (err, doc) => {
-
-                    if (err) {
-                        return reply(Boom.wrap(err, 'Internal MongoDB error'));
-                    }
-
-                    if (!doc) {
-                        return reply(Boom.notFound());
-                    }
-
-                    reply(doc);
-                });
-
-            }
-        });
-    */
 
     server.route({
         method: 'GET',
         path: '/comments/{url}',
         handler: function (request, reply) {
-
-            console.log('___params', request.query); // ?skip=20
-
 
             let total;
 
@@ -68,24 +41,24 @@ exports.register = function (server, options, next) {
             db.comments.find({
                 url: request.params.url
             },).limit(request.query.length ? parseInt(request.query) : 10)
-              .skip(request.query.skip ? parseInt(request.query.skip) : 0).sort({date: -1}, // new posts first
-              (err, doc) => {
+                .skip(request.query.skip ? parseInt(request.query.skip) : 0).sort({date: -1}, // new posts first
+                (err, doc) => {
 
-                  if (err) {
-                      return reply(Boom.wrap(err, 'Internal MongoDB error'));
-                  }
-
-                  if (!doc) {
-                      return reply(Boom.notFound());
-                  }
-
-                  reply(
-                    {
-                        data: doc,
-                        total: total
+                    if (err) {
+                        return reply(Boom.wrap(err, 'Internal MongoDB error'));
                     }
-                  );
-              });
+
+                    if (!doc) {
+                        return reply(Boom.notFound());
+                    }
+
+                    reply(
+                        {
+                            data: doc,
+                            total: total
+                        }
+                    );
+                });
 
         }
     });
@@ -114,7 +87,8 @@ exports.register = function (server, options, next) {
             validate: {
                 payload: {
                     url: Joi.string().min(3).max(2000).required(),
-                    comment: Joi.string().min(1).max(10000).required()
+                    comment: Joi.string().min(1).max(10000),
+                    images: Joi.array()
                 }
             }
         }

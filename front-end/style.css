@@ -6,6 +6,18 @@
 
 }
 
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    background-image: linear-gradient(to right top, #dee1e5, #b5ecfe, #7ef9f1, #86ffba, #cdf96b);
+}
+
 .karma-container {
     width: 80%;
     margin: 0 auto;
@@ -90,10 +102,21 @@
 }
 
 .karma-comment {
-    background: #eef;
+    background: #c7c7c7;
     padding: 10px;
     margin: 20px 0;
     border-radius: 2px;
+    overflow: hidden;
+}
+
+.karma-images {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.karma-image-preview {
+    float: left;
+    margin-right: 10px;
 }
 
 .karma-last {
@@ -102,5 +125,5 @@
 
 .karma-last li {
     list-style-type: none;
-    margin: 8px 0;
+    margin: 14px 0;
 }

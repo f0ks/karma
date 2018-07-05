@@ -1,12 +1,12 @@
 <div class="karma-search-container">
 
     <input
-      class="karma-input _search"
-      ng-model="$ctrl.search"
-      ng-change="$ctrl.onChange($ctrl.search)"
-      placeholder="Search"
-      id="search"
-      type="text"/>
+            class="karma-input _search"
+            ng-model="$ctrl.search"
+            ng-change="$ctrl.onChange($ctrl.search)"
+            placeholder="Search"
+            id="search"
+            type="text"/>
 
     <div class="karma-logo">
         <a href="javascript:void(0)" ng-click="$ctrl.goToMain()">M</a>
@@ -19,7 +19,12 @@
     <h3>Last ones</h3>
     <ul>
         <li ng-repeat="post in $ctrl.lastPosts">
-            <a ng-click="$ctrl.link=true" href="/#!/{{$ctrl.getLink(post.url)}}">{{post.comment }}</a>
+            <a ng-click="$ctrl.link=true" href="/#!/{{$ctrl.getLink(post.url)}}">{{post.comment }}
+                <span ng-repeat="img in post.images">
+                <img src="{{img}}" alt="" width="24"/>
+            </span>
+            </a>
+
         </li>
     </ul>
 
@@ -29,22 +34,59 @@
 <div ng-if="$ctrl.search">
 
     <textarea
-      class="karma-input _comment"
-      ng-model="$ctrl.comment"
-      placeholder="Write your post here"
+            class="karma-input _comment"
+            ng-model="$ctrl.comment"
+            placeholder="Write your post here"
     ></textarea>
 
+    <!-- images previews when post -->
+    <div class="karma-images">
+
+        <div class="karma-image-preview _post"
+             ng-repeat="img in $ctrl.images">
+
+            <img src="{{img}}" alt="img" width="120px"/>
+
+        </div>
+
+    </div>
+
+    <button class="karma-input _img"
+            ng-disabled="$ctrl.images.length > 9"
+            ng-click="$ctrl.addImg()"
+    >img
+    </button>
+
+
     <button class="karma-input _post"
-            ng-disabled="!(($ctrl.comment.length > 1) && ($ctrl.comment.length < 10000))"
+            ng-disabled="!( (($ctrl.comment.length > 1) && ($ctrl.comment.length < 10000)) || ( $ctrl.images.length > 0 ) )"
             ng-click="$ctrl.create($ctrl.search, $ctrl.comment)"
     >Post
     </button>
+
+
 </div>
 
 <div ng-if="$ctrl.results.data">
 
     <div class="karma-comment"
-         ng-repeat="item in $ctrl.results.data" ng-bind-html="item.comment | linky">
+         ng-repeat="item in $ctrl.results.data">
+
+        <!-- images previews -->
+        <div class="karma-images">
+
+            <div class="karma-image-preview _comment"
+                 ng-repeat="img in item.images">
+                <a href="{{img}}" target="_blank">
+                    <img src="{{img}}" alt="img" width="120px"/>
+                </a>
+            </div>
+
+        </div>
+
+        <div ng-bind-html="item.comment | linky"></div>
+
+
     </div>
 
     <ul ng-if="$ctrl.pagesCount > 1" class="karma-pagination">
