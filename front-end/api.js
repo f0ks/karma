@@ -2,7 +2,7 @@
 
 angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http, $q) {
 
-    let REST_SERVICE_URI = '/rest/comments';
+    const REST_SERVICE_URI = '/rest/comments';
 
     return {
         getAll: getAll,
@@ -18,7 +18,7 @@ angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http
                 deferred.resolve(response.data);
             },
             function (errResponse) {
-                console.error('Error while fetching departments');
+                alert('error');
                 deferred.reject(errResponse);
             }
           );
@@ -33,7 +33,7 @@ angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http
                 deferred.resolve(response.data);
             },
             function (errResponse) {
-                console.error('Error while creating department');
+                alert('error');
                 deferred.reject(errResponse);
             }
           );
@@ -48,7 +48,7 @@ angular.module('karmaApp').factory('ApiService', ['$http', '$q', function ($http
                 deferred.resolve(response.data);
             },
             function (errResponse) {
-                console.error('Error while creating department');
+                alert('error');
                 deferred.reject(errResponse);
             }
           );
