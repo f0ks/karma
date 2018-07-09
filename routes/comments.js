@@ -87,7 +87,7 @@ exports.register = function (server, options, next) {
             validate: {
                 payload: {
                     url: Joi.string().min(3).max(2000).required(),
-                    comment: Joi.string().min(1).max(10000),
+                    comment: Joi.string().max(10000),
                     images: Joi.array()
                 }
             }
