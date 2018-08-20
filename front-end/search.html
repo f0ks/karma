@@ -33,7 +33,7 @@
 
 <div ng-if="$ctrl.search">
 
-    <h5 ng-if="$ctrl.isReply">Reply to: <i>{{$ctrl.getCommentById($ctrl.replyTo)}}</i></h5>
+    <h5 class="karma-reply-to" ng-if="$ctrl.isReply">Reply to: <i>{{$ctrl.getCommentById($ctrl.replyTo)}}</i></h5>
 
     <textarea
             id="karma-comment"

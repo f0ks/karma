@@ -74,6 +74,10 @@ body {
     resize: none;
 }
 
+.karma-reply-to {
+    margin: 8px 0;
+}
+
 .karma-error {
     color: red;
     font-weight: bold;

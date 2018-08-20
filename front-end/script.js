@@ -167,7 +167,7 @@ const searchUrl = {
                     const textarea = $('#karma-comment');
                     $('html, body').animate({
                         scrollTop: textarea.offset().top
-                    }, 2000);
+                    }, 500);
                     textarea.focus();
                 }
 
