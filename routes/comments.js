@@ -88,7 +88,8 @@ exports.register = function (server, options, next) {
                 payload: {
                     url: Joi.string().min(3).max(2000).required(),
                     comment: Joi.string().max(10000),
-                    images: Joi.array()
+                    images: Joi.array(),
+                    replyTo: Joi.string().min(36).max(36)
                 }
             }
         }

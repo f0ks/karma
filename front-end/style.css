@@ -15,7 +15,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 
-    background-image: linear-gradient(to right top, #dee1e5, #b5ecfe, #7ef9f1, #86ffba, #cdf96b);
+    /*background-image: linear-gradient(to right top, #dee1e5, #b5ecfe, #7ef9f1, #86ffba, #cdf96b);*/
 }
 
 .karma-container {
@@ -102,7 +102,7 @@ body {
 }
 
 .karma-comment {
-    background: #c7c7c7;
+    background: #f7f7f7;
     padding: 10px;
     margin: 20px 0;
     border-radius: 2px;

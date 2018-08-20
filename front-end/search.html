@@ -33,7 +33,10 @@
 
 <div ng-if="$ctrl.search">
 
+    <h5 ng-if="$ctrl.isReply">Reply to: <i>{{$ctrl.getCommentById($ctrl.replyTo)}}</i></h5>
+
     <textarea
+            id="karma-comment"
             class="karma-input _comment"
             ng-model="$ctrl.comment"
             placeholder="Write your post here"
@@ -60,7 +63,7 @@
 
     <button class="karma-input _post"
             ng-disabled="!( (($ctrl.comment.length > 1) && ($ctrl.comment.length < 10000)) || ( $ctrl.images.length > 0 ) )"
-            ng-click="$ctrl.create($ctrl.search, $ctrl.comment)"
+            ng-click="$ctrl.create($ctrl.search, $ctrl.comment, $ctrl.replyTo)"
     >Post
     </button>
 
@@ -85,6 +88,8 @@
         </div>
 
         <div ng-bind-html="item.comment | linky"></div>
+
+        <a href="javascript:void(0)" ng-click="$ctrl.reply(item._id)">reply</a>
 
 
     </div>

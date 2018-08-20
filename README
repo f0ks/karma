@@ -1,7 +1,9 @@
+
+Start mongo:
 "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "C:\Users\AKhamidullin\mongodata"
+
+Start nginx
 
 TODO:
 -reply comment
--logo and link to main page
 -russian input title
--img insert ?

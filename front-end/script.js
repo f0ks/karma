@@ -10,6 +10,8 @@ const searchUrl = {
                 currentPage: 1,
                 currentUrl: null,
                 init: false,
+                isReply: false,
+                replyTo: null,
                 images: [],
 
                 $onInit() {
@@ -120,17 +122,36 @@ const searchUrl = {
                     }
 
                 },
-                create(name, comment) {
 
-                    ApiService.create({
+                getCommentById(id) {
+                    let result = null;
+                    $ctrl.results.data.forEach((el, i) => {
+                        if (el._id === id) {
+                            result = el.comment;
+                        }
+                    });
+                    return result;
+                },
+
+                create(name, comment, replyTo) {
+
+                    let model = {
                         "url": btoa(name),
                         "comment": comment,
                         "images": $ctrl.images
-                    })
+                    };
+
+                    if (replyTo) {
+                        model.replyTo = replyTo;
+                    }
+
+                    ApiService.create(model)
                         .then((data) => {
                                 $ctrl.onChange($ctrl.search);
                                 $ctrl.comment = '';
                                 $ctrl.images = [];
+                                $ctrl.isReply = false;
+                                $ctrl.replyTo = null;
                             }
                             ,
                             (err) => {
@@ -138,6 +159,16 @@ const searchUrl = {
                                 alert('Slow down');
                             }
                         );
+                },
+
+                reply(id) {
+                    $ctrl.isReply = true;
+                    $ctrl.replyTo = id;
+                    const textarea = $('#karma-comment');
+                    $('html, body').animate({
+                        scrollTop: textarea.offset().top
+                    }, 2000);
+                    textarea.focus();
                 }
 
             }
