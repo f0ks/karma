@@ -150,8 +150,7 @@ const searchUrl = {
                                 $ctrl.onChange($ctrl.search);
                                 $ctrl.comment = '';
                                 $ctrl.images = [];
-                                $ctrl.isReply = false;
-                                $ctrl.replyTo = null;
+                                $ctrl.cancelReply();
                             }
                             ,
                             (err) => {
@@ -159,6 +158,11 @@ const searchUrl = {
                                 alert('Slow down');
                             }
                         );
+                },
+
+                cancelReply() {
+                    $ctrl.isReply = false;
+                    $ctrl.replyTo = null;
                 },
 
                 reply(id) {
