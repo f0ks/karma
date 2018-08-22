@@ -64,6 +64,28 @@ exports.register = function (server, options, next) {
     });
 
     server.route({
+        method: 'GET',
+        path: '/comments/id/{id}',
+        handler: function (request, reply) {
+            db.comments.findOne({
+                _id: request.params.id
+            }, (err, comment) => {
+
+                if (err) {
+                    return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                }
+
+                if (!comment) {
+                    reply([]);
+                }
+
+                reply(comment);
+            });
+
+        }
+    });
+
+    server.route({
         method: 'POST',
         path: '/comments',
         handler: function (request, reply) {

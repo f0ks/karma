@@ -78,6 +78,13 @@ body {
     margin: 8px 0;
 }
 
+.karma-reply-to__arrow {
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
 .karma-error {
     color: red;
     font-weight: bold;
@@ -111,6 +118,12 @@ body {
     margin: 20px 0;
     border-radius: 2px;
     overflow: hidden;
+}
+
+.karma-comment__id {
+    float: right;
+    font-size: 10px;
+    color: #ccc;
 }
 
 .karma-images {

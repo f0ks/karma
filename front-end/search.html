@@ -33,7 +33,7 @@
 
 <div ng-if="$ctrl.search">
 
-    <h5 class="karma-reply-to" ng-if="$ctrl.isReply">Reply to: <i>{{$ctrl.getCommentById($ctrl.replyTo)}}</i>
+    <h5 class="karma-reply-to" ng-if="$ctrl.isReply">Reply to: <i>{{$ctrl.getCommentByIdFromPage($ctrl.replyTo)}}</i>
         <button ng-if="$ctrl.isReply"
                 ng-click="$ctrl.cancelReply()">Cancel reply</button>
     </h5>
@@ -74,6 +74,8 @@
 
 </div>
 
+<!-- -----------------------------------------------------------------------------------------------------------  -->
+
 <div ng-if="$ctrl.results.data">
 
     <div class="karma-comment"
@@ -91,9 +93,20 @@
 
         </div>
 
+        <div class="karma-reply-to"
+             ng-if="item.replyTo">
+            <div  ng-mouseover="$ctrl.getCommentByIdFromDB(item.replyTo)"
+                  class="karma-reply-to__arrow">>> {{item.replyTo}}</div>
+            <div class="karma-reply-to__reply-text">{{  }}</div>
+
+        </div>
+
         <div ng-bind-html="item.comment | linky"></div>
 
+
         <a href="javascript:void(0)" ng-click="$ctrl.reply(item._id)">reply</a>
+
+        <div class="karma-comment__id">{{item._id}}</div>
 
 
     </div>

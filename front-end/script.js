@@ -13,6 +13,7 @@ const searchUrl = {
                 isReply: false,
                 replyTo: null,
                 images: [],
+                fetchedReplies: [], // loaded on mouseover id on reply post
 
                 $onInit() {
                     document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
@@ -86,7 +87,7 @@ const searchUrl = {
 
                     $location.path('/' + btoa(value));
                     const skip = $ctrl.pageSize * ($ctrl.currentPage - 1);
-                    ApiService.getOne(btoa(value), skip)
+                    ApiService.getPage(btoa(value), skip)
                         .then((data) => {
                                 $ctrl.results = data;
 
@@ -123,7 +124,34 @@ const searchUrl = {
 
                 },
 
-                getCommentById(id) {
+                getCommentByIdFromDB(id) {
+
+                    let dup = false;
+                    $ctrl.fetchedReplies.forEach((item) => {
+                        if (item._id === id) {
+                            dup = true;
+                        }
+                    });
+
+                    if (!dup) {
+                        // get last posts
+                        ApiService.getOneById(id)
+                            .then((data) => {
+                                    $ctrl.fetchedReplies.push(data);
+                                }
+                                ,
+                                (err) => {
+                                    console.log(err);
+                                    alert('error');
+                                }
+                            );
+                    }
+
+                },
+
+                // if reply for comment on current page
+                // no need to fetch it from server again
+                getCommentByIdFromPage(id) {
                     let result = null;
                     $ctrl.results.data.forEach((el, i) => {
                         if (el._id === id) {
