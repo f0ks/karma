@@ -106,6 +106,19 @@
         <div style="margin: 10px 0" ng-bind-html="item.comment | linky"></div>
 
 
+        <!-- replies -->
+        <div ng-repeat="replyId in item.replies">
+            <hr>
+            {{replyId}}
+
+            <!-- not working (why?)
+                          {{$ctrl.getCommentByIdFromDB(replyId)}}
+
+
+              -->
+        </div>
+
+
         <button class="karma-input" ng-click="$ctrl.reply(item._id)">reply</button>
 
         <div class="karma-comment__id">{{item._id}}</div>
