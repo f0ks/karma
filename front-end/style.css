@@ -85,6 +85,23 @@ body {
     display: inline-block;
 }
 
+.karma-reply-to__reply-text {
+    border: 1px solid #ccc;
+    width: 300px;
+    height: auto;
+    padding: 10px;
+    position: absolute;
+    background: white;
+    box-shadow: 3px 3px 5px #ccc;
+    font-size: 12px;
+    display: none;
+
+}
+
+.karma-reply-to__arrow:hover + .karma-reply-to__reply-text {
+    display: block;
+}
+
 .karma-error {
     color: red;
     font-weight: bold;

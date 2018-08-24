@@ -13,7 +13,7 @@ const searchUrl = {
                 isReply: false,
                 replyTo: null,
                 images: [],
-                fetchedReplies: [], // loaded on mouseover id on reply post
+                fetchedReplies: {}, // {<id>: <reply_to_id>} loaded on mouseover id on reply post
 
                 $onInit() {
                     document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
@@ -126,26 +126,21 @@ const searchUrl = {
 
                 getCommentByIdFromDB(id) {
 
-                    let dup = false;
-                    $ctrl.fetchedReplies.forEach((item) => {
-                        if (item._id === id) {
-                            dup = true;
-                        }
-                    });
+                    if ($ctrl.fetchedReplies.hasOwnProperty(id)) return; // already added
 
-                    if (!dup) {
-                        // get last posts
-                        ApiService.getOneById(id)
-                            .then((data) => {
-                                    $ctrl.fetchedReplies.push(data);
-                                }
-                                ,
-                                (err) => {
-                                    console.log(err);
-                                    alert('error');
-                                }
-                            );
-                    }
+
+                    // get last posts
+                    ApiService.getOneById(id)
+                        .then((data) => {
+                                $ctrl.fetchedReplies[id] = data.comment;
+                            }
+                            ,
+                            (err) => {
+                                console.log(err);
+                                alert('error');
+                            }
+                        );
+
 
                 },
 

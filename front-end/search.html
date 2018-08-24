@@ -8,9 +8,9 @@
             id="search"
             type="text"/>
 
-    <div class="karma-logo">
+<!--    <div class="karma-logo">
         <a href="javascript:void(0)" ng-click="$ctrl.goToMain()">M</a>
-    </div>
+    </div>-->
 
 </div>
 
@@ -96,15 +96,17 @@
         <div class="karma-reply-to"
              ng-if="item.replyTo">
             <div  ng-mouseover="$ctrl.getCommentByIdFromDB(item.replyTo)"
-                  class="karma-reply-to__arrow">>> {{item.replyTo}}</div>
-            <div class="karma-reply-to__reply-text">{{  }}</div>
+                  class="karma-reply-to__arrow">>> {{ item.replyTo }}</div>
+            <div class="karma-reply-to__reply-text">{{ $ctrl.fetchedReplies[item.replyTo] }}</div>
+
+
 
         </div>
 
-        <div ng-bind-html="item.comment | linky"></div>
+        <div style="margin: 10px 0" ng-bind-html="item.comment | linky"></div>
 
 
-        <a href="javascript:void(0)" ng-click="$ctrl.reply(item._id)">reply</a>
+        <button class="karma-input" ng-click="$ctrl.reply(item._id)">reply</button>
 
         <div class="karma-comment__id">{{item._id}}</div>
 
