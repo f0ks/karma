@@ -95,11 +95,18 @@ exports.register = function (server, options, next) {
             //Create an id
             record._id = uuid.v1();
             record.date = new Date().getTime();
+            record.replies = [];
 
             db.comments.save(record, (err, result) => {
 
                 if (err) {
                     return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                } else {
+                    // find comment which is we repling
+                    // and write id of reply to list
+                    if (request.payload.replyTo) {
+                        db.comments.update({_id: request.payload.replyTo}, {$push: {replies: record._id}});
+                    }
                 }
 
                 reply(record);
