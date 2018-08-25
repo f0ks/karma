@@ -33,9 +33,11 @@
 
 <div ng-if="$ctrl.search">
 
-    <h5 class="karma-header-reply" ng-if="$ctrl.isReply">Reply to: <i>{{$ctrl.getCommentByIdFromPage($ctrl.replyTo)}}</i>
+    <h5 class="karma-header-reply" ng-if="$ctrl.isReply">Reply to:
+        <i>{{$ctrl.getCommentByIdFromPage($ctrl.replyTo)}}</i>
         <button ng-if="$ctrl.isReply"
-                ng-click="$ctrl.cancelReply()">Cancel</button>
+                ng-click="$ctrl.cancelReply()">Cancel
+        </button>
     </h5>
 
 
@@ -78,8 +80,12 @@
 
 <div ng-if="$ctrl.results.data">
 
+
     <div class="karma-comment"
          ng-repeat="item in $ctrl.results.data">
+
+        <!--<code>{{item}}</code>-->
+
 
         <!-- images previews -->
         <div class="karma-images">
@@ -95,10 +101,14 @@
 
         <div class="karma-reply-to"
              ng-if="item.replyTo">
-            <div  ng-mouseover="$ctrl.getCommentByIdFromDB(item.replyTo)"
-                  class="karma-reply-to__arrow">>> {{ item.replyTo }}</div>
-            <div class="karma-reply-to__reply-text">{{ $ctrl.fetchedReplies[item.replyTo] }}</div>
-
+            <div ng-mouseover="$ctrl.getCommentByIdFromDB(item.replyTo)"
+                 class="karma-reply-to__arrow">>> {{ item.replyTo }}
+            </div>
+            <div class="karma-reply-to__reply-text">{{ $ctrl.fetchedReplies[item.replyTo] }}
+                <span ng-repeat="image in $ctrl.fetchedImages[item.replyTo]">
+                   <img src="{{image}}"/>
+               </span>
+            </div>
 
 
         </div>
@@ -111,14 +121,17 @@
             <!-- replies -->
             <span ng-repeat="replyId in item.replies">
 
-            <div class="karma-reply-to__arrow" ng-mouseover="$ctrl.attachReplyTextToItem(item, replyId)">>>{{replyId}}</div>
+            <div class="karma-reply-to__arrow"
+                 ng-mouseover="$ctrl.attachReplyTextToItem(item, replyId)">>>{{replyId}}</div>
 
-            <div class="karma-reply-to__reply-text">{{ item.repliesText[replyId] }}</div>
+            <div class="karma-reply-to__reply-text">{{ item.repliesText[replyId] }}
+               <span ng-repeat="image in $ctrl.fetchedImages[replyId]">
+                   <img src="{{image}}"/>
+               </span>
+            </div>
 
         </span>
         </div>
-
-
 
 
         <button class="karma-input" ng-click="$ctrl.reply(item._id)">reply</button>

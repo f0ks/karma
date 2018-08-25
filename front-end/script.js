@@ -15,6 +15,7 @@ const searchUrl = {
                 replyTo: null,
                 images: [],
                 fetchedReplies: {}, // {<id>: <reply_to_id>} loaded on mouseover id on reply post
+                fetchedImages: {}, // {<id>: [images]}
 
                 $onInit() {
                     document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
@@ -126,15 +127,13 @@ const searchUrl = {
                 },
 
                 getCommentByIdFromDB(id) {
-
                     let deferred = $q.defer();
-
                     if ($ctrl.fetchedReplies.hasOwnProperty(id)) return; // already added
-
 
                     ApiService.getOneById(id)
                         .then((data) => {
                                 $ctrl.fetchedReplies[id] = data.comment;
+                                $ctrl.fetchedImages[id] = data.images;
                                 deferred.resolve();
                             }
                             ,
@@ -145,8 +144,8 @@ const searchUrl = {
                             }
                         );
                     return deferred.promise;
-
                 },
+
 
                 // if reply for comment on current page
                 // no need to fetch it from server again
@@ -164,17 +163,22 @@ const searchUrl = {
                     if (!item.repliesText) {
                         item.repliesText = {};
                     }
+                    if (!item.repliesImages) {
+                        item.repliesImages = {};
+                    }
 
                     if (item.repliesText[commentId]) return;
 
-                    let promise = $ctrl.getCommentByIdFromDB(commentId);
+                    let commentsPromise = $ctrl.getCommentByIdFromDB(commentId);
 
-                    promise.then(function() {
+
+                    commentsPromise.then(function() {
                         item.repliesText[commentId] = $ctrl.fetchedReplies[commentId];
+                        item.repliesImages[commentId] = $ctrl.fetchedImages[commentId];
+
                     }, function() {
                         console.log('error');
                     });
-
 
                 },
 

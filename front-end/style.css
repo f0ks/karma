@@ -30,7 +30,7 @@ body {
 }
 
 .karma-logo {
-    margin-top: -52px;
+    margin-top: -60px;
 }
 
 .karma-logo a {
@@ -63,7 +63,8 @@ body {
 .karma-input._search {
     width: calc(100% - 40px);
     margin-left: 40px;
-    font-size: 18px;
+    font-size: 30px;
+    font-weight: bold;
     color: green;
     margin-top: 20px;
 }
@@ -96,6 +97,10 @@ body {
     font-size: 12px;
     display: none;
 
+}
+
+.karma-reply-to__reply-text img {
+    width: 280px;
 }
 
 .karma-reply-to__arrow:hover + .karma-reply-to__reply-text {
