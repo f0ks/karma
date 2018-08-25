@@ -60,7 +60,7 @@ const searchUrl = {
                             ,
                             (err) => {
                                 console.log(err);
-                                alert('error');
+                                //alert('error');
                             }
                         );
                 },
@@ -200,7 +200,7 @@ const searchUrl = {
                             ,
                             (err) => {
                                 console.log(err);
-                                alert('Slow down');
+                                alert('Slow down. You post too fast.');
                             }
                         );
                 },

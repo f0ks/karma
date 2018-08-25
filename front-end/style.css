@@ -15,7 +15,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 
-    /*background-image: linear-gradient(to right top, #dee1e5, #b5ecfe, #7ef9f1, #86ffba, #cdf96b);*/
+    background-image: linear-gradient(to right top, #dee1e5, #b5ecfe, #7ef9f1, #86ffba, #cdf96b);
 }
 
 .karma-container {
@@ -102,6 +102,17 @@ body {
     display: block;
 }
 
+.karma-reply-to {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: -10px;
+}
+
+.karma-reply-to._bottom {
+
+    margin-top: 10px;
+}
+
 .karma-error {
     color: red;
     font-weight: bold;
@@ -130,17 +141,22 @@ body {
 }
 
 .karma-comment {
-    background: #f7f7f7;
-    padding: 10px;
+    background: #deffed;
+    padding: 10px 10px 0 10px;
     margin: 20px 0;
     border-radius: 2px;
     overflow: hidden;
+}
+
+.karma-header-reply {
+    margin: 5px 0;
 }
 
 .karma-comment__id {
     float: right;
     font-size: 10px;
     color: #ccc;
+    margin-top: 20px;
 }
 
 .karma-images {
