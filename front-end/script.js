@@ -4,7 +4,6 @@ const searchUrl = {
     controller: function (ApiService, $location, $rootScope, $q) {
 
         const $ctrl = this;
-
         Object.assign($ctrl, {
 
                 pageSize: 10,
@@ -172,11 +171,11 @@ const searchUrl = {
                     let commentsPromise = $ctrl.getCommentByIdFromDB(commentId);
 
 
-                    commentsPromise.then(function() {
+                    commentsPromise.then(function () {
                         item.repliesText[commentId] = $ctrl.fetchedReplies[commentId];
                         item.repliesImages[commentId] = $ctrl.fetchedImages[commentId];
 
-                    }, function() {
+                    }, function () {
                         console.log('error');
                     });
 
