@@ -1,7 +1,8 @@
 'use strict';
 
 const searchUrl = {
-    controller: function (ApiService, $location, $rootScope) {
+    controller: function (ApiService, $location, $rootScope, $q) {
+
         const $ctrl = this;
 
         Object.assign($ctrl, {
@@ -126,21 +127,24 @@ const searchUrl = {
 
                 getCommentByIdFromDB(id) {
 
+                    let deferred = $q.defer();
+
                     if ($ctrl.fetchedReplies.hasOwnProperty(id)) return; // already added
 
 
-                    // get last posts
                     ApiService.getOneById(id)
                         .then((data) => {
                                 $ctrl.fetchedReplies[id] = data.comment;
+                                deferred.resolve();
                             }
                             ,
                             (err) => {
                                 console.log(err);
+                                deferred.reject();
                                 alert('error');
                             }
                         );
-
+                    return deferred.promise;
 
                 },
 
@@ -154,6 +158,24 @@ const searchUrl = {
                         }
                     });
                     return result;
+                },
+
+                attachReplyTextToItem(item, commentId) {
+                    if (!item.repliesText) {
+                        item.repliesText = {};
+                    }
+
+                    if (item.repliesText[commentId]) return;
+
+                    let promise = $ctrl.getCommentByIdFromDB(commentId);
+
+                    promise.then(function() {
+                        item.repliesText[commentId] = $ctrl.fetchedReplies[commentId];
+                    }, function() {
+                        console.log('error');
+                    });
+
+
                 },
 
                 create(name, comment, replyTo) {

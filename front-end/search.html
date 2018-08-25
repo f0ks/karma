@@ -108,14 +108,10 @@
 
         <!-- replies -->
         <div ng-repeat="replyId in item.replies">
-            <hr>
-            {{replyId}}
+            <div ng-mouseover="$ctrl.attachReplyTextToItem(item, replyId)">{{replyId}}</div>
 
-            <!-- not working (why?)
-                          {{$ctrl.getCommentByIdFromDB(replyId)}}
+            <div>{{ item.repliesText[replyId] }}</div>
 
-
-              -->
         </div>
 
 
