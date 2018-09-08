@@ -113,7 +113,7 @@
 
         </div>
 
-        <div style="margin: 10px 0" ng-bind-html="item.comment | linky"></div>
+        <div style="margin: 10px 0" ng-bind-html="item.comment | linky:'_blank'"></div>
 
         <div ng-if="item.replies.length > 0" class="karma-reply-to _bottom">
             Replies:
