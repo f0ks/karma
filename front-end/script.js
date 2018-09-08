@@ -15,6 +15,8 @@ const searchUrl = {
                 images: [],
                 fetchedReplies: {}, // {<id>: <reply_to_id>} loaded on mouseover id on reply post
                 fetchedImages: {}, // {<id>: [images]}
+                searchPending: false,
+                requestPending: false,
 
                 $onInit() {
                     document.querySelectorAll('.karma-container')[0].style.display = 'block'; // for noscript
@@ -85,12 +87,15 @@ const searchUrl = {
 
                 onChange(value) {
                     $ctrl.currentUrl = value;
+                    $ctrl.searchPending = true;
+
 
                     $location.path('/' + btoa(value));
                     const skip = $ctrl.pageSize * ($ctrl.currentPage - 1);
                     ApiService.getPage(btoa(value), skip)
                         .then((data) => {
                                 $ctrl.results = data;
+                                $ctrl.searchPending = false;
 
                                 $ctrl.pagesCount = Math.ceil($ctrl.results.total / $ctrl.pageSize);
                                 console.log(data)
@@ -99,6 +104,8 @@ const searchUrl = {
                             (err) => {
                                 console.log(err);
                                 alert('error');
+                                $ctrl.searchPending = false;
+
                             }
                         );
                 },
@@ -183,6 +190,8 @@ const searchUrl = {
 
                 create(name, comment, replyTo) {
 
+                    $ctrl.postPending = true;
+
                     let model = {
                         "url": btoa(name),
                         "comment": comment,
@@ -199,11 +208,15 @@ const searchUrl = {
                                 $ctrl.comment = '';
                                 $ctrl.images = [];
                                 $ctrl.cancelReply();
+                                $ctrl.postPending = false;
+
                             }
                             ,
                             (err) => {
                                 console.log(err);
                                 alert('Slow down. You post too fast.');
+                                $ctrl.postPending = false;
+
                             }
                         );
                 },
