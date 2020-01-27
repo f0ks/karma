@@ -5,10 +5,15 @@ export default class PostingForm extends React.Component {
     render() {
         return (
             <section className={'posting-form'}>
-                <textarea className={'form-control'}> </textarea>
 
-                <button type="button" className="btn btn-secondary">Attach image</button>
-                <button type="button" className="btn btn-primary">Post</button>
+                <div className="form-group">
+                    <textarea className={'form-control'}> </textarea>
+                </div>
+
+                <div className="form-group text-left">
+                    <button type="button" className="btn btn-primary">Post</button>
+                    <button type="button" className="btn btn-outline-primary">Attach image</button>
+                </div>
             </section>
 
         );
