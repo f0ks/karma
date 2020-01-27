@@ -1,25 +1,17 @@
 import React from 'react';
 
 export default class Header extends React.Component {
-  render() {
-    return (
-      <header>
-        <ul className="nav">
-          <li className="nav-item">
-            <a className="nav-link active" href="#">Active</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-      </header>
+    render() {
+        return (
+            <header
+                className="header d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+                <h5 className="my-0 mr-md-auto font-weight-normal">Boroda board</h5>
+                <nav className="my-2 my-md-0 mr-md-3">
+                    <a className="p-2 text-dark" href="#">Contact</a>
+                </nav>
+                {/*<a className="btn btn-outline-primary" href="#">Sign up</a>*/}
+            </header>
 
-    );
-  }
+        );
+    }
 }
