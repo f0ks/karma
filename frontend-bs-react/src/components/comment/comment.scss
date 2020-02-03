@@ -1,0 +1,14 @@
+@import "../../globals";
+
+.comments {
+  margin: $default-padding;
+
+  &__comment {
+  }
+
+
+  &__body {
+    background: $color-grey-light;
+  }
+
+}
